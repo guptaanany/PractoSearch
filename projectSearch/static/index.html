@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practo Search</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Bootstrap -->
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-route.min.js"></script>
+	<script src="js/index.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet" />
+
+	<style>
+
+		.back {
+
+			/*background: url(images/doctor-photo.jpg) no-repeat center fixed, -webkit-linear-gradient(top,rgb(255,255,255,1) 0px, rgb(255,255,255,0) 50px); 
+		    background: url(images/doctor-photo.jpg) no-repeat center fixed, -o-linear-gradient(top,rgb(255,255,255,1) 0px, rgb(255,255,255,0) 50px);
+		    background: url(images/doctor-photo.jpg) no-repeat center fixed, -moz-linear-gradient(top,rgb(255,255,255,1) 0px, rgb(255,255,255,0) 50px);
+		    background: url(images/doctor-photo.jpg) no-repeat center fixed, linear-gradient(to bottom,rgb(255,255,255,1) 0px, rgb(255,255,255,0) 50px);
+		    */
+
+		    background: url(images/doctor-photo.jpg) no-repeat center center fixed;
+		    
+		    -webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+
+		body {
+			padding-top: 20px;
+			font-size: 16px;
+			font-family: "Open Sans",serif;
+
+		}
+
+		h1 {
+			font-family: "Abel", Arial, sans-serif;
+			font-weight: 400;
+			font-size: 40px;
+		}
+
+		/* Override B3 .panel adding a subtly transparent background */
+		.panel {
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.margin-base-vertical {
+			margin: 20px 0;
+		}
+
+
+		.vertical-center-row{
+			width:80%;
+			margin:0 auto;
+		}
+
+		html, body{
+		    height: 100%;
+		}
+
+		body {
+			display: flex;  
+			flex-direction: column;
+		}
+
+		.contentWrapper {
+			flex:1;
+			display:flex;
+		}
+		.content {
+			width:100%;
+			height:100%;
+		}
+
+		.container {
+			flex:1;
+			text-align:center;
+			display:flex;
+			align-items:center;
+			width:100%;
+		}
+
+		.subheading {
+			margin: 20px 0;
+			color: white;
+			font-size: 36px;
+			text-align: center;
+			text-shadow: 0 0 15px black, 0 0 25px black, 0 0 35px black;
+		}
+
+		.headerLogo {
+			float:left;
+		}
+
+		.wrapper {
+			margin:0 auto;
+		}
+
+		.row-centered {
+	    	text-align:center;
+		}
+		#header {
+			height: 50px;
+			position: relative;
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.cityButton{
+		    text-decoration: none;
+		    color: #999;
+		    height: auto;
+		    line-height: 1;
+		    font-size:15px;
+		    padding: 5px 10px;
+		    font-weight: 600;
+		    -moz-border-radius: 3px;
+		    -webkit-border-radius: 3px;
+		    -o-border-radius: 3px;
+		    -ms-border-radius: 3px;
+		    border-radius: 3px;
+		    border: 1px solid transparent;
+		    position:absolute;
+		    right:10;
+		    top:10;
+		}
+
+		.cityButton:hover{
+		    background-color:#4467D7;
+		    cursor:pointer;
+		    color:white;
+
+		}
+
+		.city {
+			position:relative;
+			width:200px;
+			display:inline-block;
+			float:right;
+			text-align:left;
+		}
+
+		.city > a.active {
+		    background-color: #18AADC;
+		    color:white;
+		}
+
+		.city > div.active {
+		    display:block;
+
+		}
+
+		.city ul{
+			background: #fff;
+			left: 0;
+			position: absolute;
+			top: 46px !important;
+			width: 100% !important;
+			z-index: 999;
+			overflow: auto;
+			border: 1px solid #e1e1e1;
+			border-top: none;
+			padding:0px;
+		}
+
+		.city ul li {
+			display: block;
+			background: #f9f9f9;
+			float: none!important;
+			margin-bottom: 0!important;
+			width: 100%!important;
+		}
+
+		.city ul li a{
+			color: #464646;
+			text-decoration: none;
+			display: block;
+			padding: 5px 19px;
+		}
+
+		.city ul li a:hover{
+			color:#fff;
+			text-decoration: none;
+			background:#18AADC;
+		}
+
+		.content{
+			background: url('/images/lil_fiber.png') repeat left top;
+			border: 0;
+		}
+
+		#container {
+			background-color: #FFF;
+			padding: 15px;
+			margin-top:30px;
+			margin-bottom:30px;
+			width:80%;
+			position: relative;
+			-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+			-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+			flex:1;
+			margin-left:auto;
+			margin-right:auto;
+
+		}
+
+		#results section{
+			border-bottom: 1px solid #666;
+		}
+
+		.image-container {
+			float:left;
+			box-sizing: border-box;
+		}
+
+		.result-part {
+			margin: 10px;
+			overflow: hidden;
+			padding-bottom: 5px;
+		}
+
+		.result-thumb {
+			height: auto;
+			width: 90px;
+			max-width: 100%;
+			vertical-align: middle;
+			border: 0;
+		}
+
+		.doc-details{
+			float:left;
+			display: inline-block;
+			margin-left:10px;
+		}
+
+		.doc-details p{
+			color:#999;
+		}
+
+	</style>
+
+</head>
+<body ng-app = "PractoSearch">
+	<div id="header" ng-controller = "headerController">
+		<a class="headerLogo" href="/">
+			<img src="./images/practo_logo.png" style="margin-left:10px">
+		</a>
+		<div class="city">
+			<a class="cityButton" ng-class="clicked?'active':''" ng-click="toggleClass()">{{citySelected}}</a>
+			<ul style="top: 20px; max-height: 322px;" ng-show="clicked">
+				<li><a href="" ng-click="select($event)">Adilabad</a></li>
+				<li><a href="" ng-click="select($event)">Afjalpur</a></li>
+				<li><a href="" ng-click="select($event)">Agra</a></li>
+				<li><a href="" ng-click="select($event)">Ahmedabad</a></li>
+				<li><a href="" ng-click="select($event)">Ahmednagar</a></li>
+				<li><a href="" ng-click="select($event)">Aizawl</a></li>
+				<li><a href="" ng-click="select($event)">Ajmer</a></li>
+				<li><a href="" ng-click="select($event)">Akola</a></li>
+				<li><a href="" ng-click="select($event)">Alappuzha</a></li>
+				<li><a href="" ng-click="select($event)">Aligarh</a></li>
+				<li><a href="" ng-click="select($event)">Allahabad</a></li>
+				<li><a href="" ng-click="select($event)">Alwar</a></li>
+				<li><a href="" ng-click="select($event)">Ambala</a></li>
+				<li><a href="" ng-click="select($event)">Amravati</a></li>
+				<li><a href="" ng-click="select($event)">Amreli</a></li>
+				<li><a href="" ng-click="select($event)">Amritsar</a></li>
+				<li><a href="" ng-click="select($event)">Anand</a></li>
+				<li><a href="" ng-click="select($event)">Anantapur</a></li>
+				<li><a href="" ng-click="select($event)">Andaman</a></li>
+				<li><a href="" ng-click="select($event)">Ariyalur</a></li>
+				<li><a href="" ng-click="select($event)">Aurangabad</a></li>
+				<li><a href="" ng-click="select($event)">Bagalkot</a></li>
+				<li><a href="" ng-click="select($event)">Bagepalli</a></li>
+				<li><a href="" ng-click="select($event)">Balangir</a></li>
+				<li><a href="" ng-click="select($event)">Balrampur</a></li>
+				<li><a href="" ng-click="select($event)">Banas Kantha</a></li>
+				<li><a href="" ng-click="select($event)">Bangalore Rural</a></li>
+				<li><a href="" ng-click="select($event)">Barabanki</a></li>
+				<li><a href="" ng-click="select($event)">Bardhaman</a></li>
+				<li><a href="" ng-click="select($event)">Bareilly</a></li>
+				<li><a href="" ng-click="select($event)">Barpeta</a></li>
+				<li><a href="" ng-click="select($event)">Bastar</a></li>
+				<li><a href="" ng-click="select($event)">Basti</a></li>
+				<li><a href="" ng-click="select($event)">Batangas</a></li>
+				<li><a href="" ng-click="select($event)">Bathinda</a></li>
+				<li><a href="" ng-click="select($event)">Beed</a></li>
+				<li><a href="" ng-click="select($event)">Belgaum</a></li>
+				<li><a href="" ng-click="select($event)">Bellary</a></li>
+				<li><a href="" ng-click="select($event)">Belur</a></li>
+				<li><a href="" ng-click="select($event)">Bhadravathi</a></li>
+				<li><a href="" ng-click="select($event)">Bharatpur</a></li>
+				<li><a href="" ng-click="select($event)">Bharuch</a></li>
+				<li><a href="" ng-click="select($event)">Bhavnagar</a></li>
+				<li><a href="" ng-click="select($event)">Bhilwara</a></li>
+				<li><a href="" ng-click="select($event)">Bhiwani</a></li>
+				<li><a href="" ng-click="select($event)">Bhopal</a></li>
+				<li><a href="" ng-click="select($event)">Bhubaneswar</a></li>
+				<li><a href="" ng-click="select($event)">Bidar</a></li>
+				<li><a href="" ng-click="select($event)">Bijapur</a></li>
+				<li><a href="" ng-click="select($event)">Bijnor</a></li>
+				<li><a href="" ng-click="select($event)">Bikaner</a></li>
+				<li><a href="" ng-click="select($event)">Bilaspur</a></li>
+				<li><a href="" ng-click="select($event)">Birbhum</a></li>
+				<li><a href="" ng-click="select($event)">Bokaro</a></li>
+				<li><a href="" ng-click="select($event)">Buldhana</a></li>
+				<li><a href="" ng-click="select($event)">Burhanpur</a></li>
+				<li><a href="" ng-click="select($event)">Challakere</a></li>
+				<li><a href="" ng-click="select($event)">Chandauli</a></li>
+				<li><a href="" ng-click="select($event)">Chandigarh</a></li>
+				<li><a href="" ng-click="select($event)">Chandrapur</a></li>
+				<li><a href="" ng-click="select($event)">Chatra</a></li>
+				<li><a href="" ng-click="select($event)">Chhatarpur</a></li>
+				<li><a href="" ng-click="select($event)">Chickballapur</a></li>
+				<li><a href="" ng-click="select($event)">Chittoor</a></li>
+				<li><a href="" ng-click="select($event)">Chittorgarh</a></li>
+				<li><a href="" ng-click="select($event)">Coimbatore</a></li>
+				<li><a href="" ng-click="select($event)">Cooch Behar</a></li>
+				<li><a href="" ng-click="select($event)">Cuddalore</a></li>
+				<li><a href="" ng-click="select($event)">Cuddapah</a></li>
+				<li><a href="" ng-click="select($event)">Cuttack</a></li>
+				<li><a href="" ng-click="select($event)">Daman</a></li>
+				<li><a href="" ng-click="select($event)">Dangs</a></li>
+				<li><a href="" ng-click="select($event)">Darbhanga</a></li>
+				<li><a href="" ng-click="select($event)">Darjeeling</a></li>
+				<li><a href="" ng-click="select($event)">Davanagere</a></li>
+				<li><a href="" ng-click="select($event)">Dehradun</a></li>
+				<li><a href="" ng-click="select($event)">Deoghar</a></li>
+				<li><a href="" ng-click="select($event)">Dhamtari</a></li>
+				<li><a href="" ng-click="select($event)">Dhanbad</a></li>
+				<li><a href="" ng-click="select($event)">Dhar</a></li>
+				<li><a href="" ng-click="select($event)">Dharmapuri</a></li>
+				<li><a href="" ng-click="select($event)">Dharwad</a></li>
+				<li><a href="" ng-click="select($event)">Dhule</a></li>
+				<li><a href="" ng-click="select($event)">Dindigul</a></li>
+				<li><a href="" ng-click="select($event)">Dohad</a></li>
+				<li><a href="" ng-click="select($event)">Dungarpur</a></li>
+				<li><a href="" ng-click="select($event)">Durg</a></li>
+				<li><a href="" ng-click="select($event)">East Godavari</a></li>
+				<li><a href="" ng-click="select($event)">East Khasi Hills</a></li>
+				<li><a href="" ng-click="select($event)">East Medinipur</a></li>
+				<li><a href="" ng-click="select($event)">East Sikkim</a></li>
+				<li><a href="" ng-click="select($event)">Eluru</a></li>
+				<li><a href="" ng-click="select($event)">Ernakulam</a></li>
+				<li><a href="" ng-click="select($event)">Erode</a></li>
+				<li><a href="" ng-click="select($event)">Etah</a></li>
+				<li><a href="" ng-click="select($event)">Faizabad</a></li>
+				<li><a href="" ng-click="select($event)">Faridabad</a></li>
+				<li><a href="" ng-click="select($event)">Faridkot</a></li>
+				<li><a href="" ng-click="select($event)">Fatehabad</a></li>
+				<li><a href="" ng-click="select($event)">Fatehgarh Sahib</a></li>
+				<li><a href="" ng-click="select($event)">Firozabad</a></li>
+				<li><a href="" ng-click="select($event)">Gadag</a></li>
+				<li><a href="" ng-click="select($event)">Gandhinagar</a></li>
+				<li><a href="" ng-click="select($event)">Ganjam</a></li>
+				<li><a href="" ng-click="select($event)">Gaya</a></li>
+				<li><a href="" ng-click="select($event)">Ghaziabad</a></li>
+				<li><a href="" ng-click="select($event)">Ghazipur</a></li>
+				<li><a href="" ng-click="select($event)">Goalpara</a></li>
+				<li><a href="" ng-click="select($event)">Gokak</a></li>
+				<li><a href="" ng-click="select($event)">Golaghat</a></li>
+				<li><a href="" ng-click="select($event)">Gorakhpur</a></li>
+				<li><a href="" ng-click="select($event)">Gulbarga</a></li>
+				<li><a href="" ng-click="select($event)">Guna</a></li>
+				<li><a href="" ng-click="select($event)">Guntur</a></li>
+				<li><a href="" ng-click="select($event)">Gurdaspur</a></li>
+				<li><a href="" ng-click="select($event)">Gurgaon</a></li>
+				<li><a href="" ng-click="select($event)">Guwahati</a></li>
+				<li><a href="" ng-click="select($event)">Gwalior</a></li>
+				<li><a href="" ng-click="select($event)">Hailakandi</a></li>
+				<li><a href="" ng-click="select($event)">Haliyal</a></li>
+				<li><a href="" ng-click="select($event)">Hamirpur</a></li>
+				<li><a href="" ng-click="select($event)">Hardoi</a></li>
+				<li><a href="" ng-click="select($event)">Haridwar</a></li>
+				<li><a href="" ng-click="select($event)">Hassan</a></li>
+				<li><a href="" ng-click="select($event)">Haveri</a></li>
+				<li><a href="" ng-click="select($event)">Hazaribag</a></li>
+				<li><a href="" ng-click="select($event)">Hingoli</a></li>
+				<li><a href="" ng-click="select($event)">Hiriyur</a></li>
+				<li><a href="" ng-click="select($event)">Hisar</a></li>
+				<li><a href="" ng-click="select($event)">Hooghly</a></li>
+				<li><a href="" ng-click="select($event)">Hoshiarpur</a></li>
+				<li><a href="" ng-click="select($event)">Howrah</a></li>
+				<li><a href="" ng-click="select($event)">Hubli</a></li>
+				<li><a href="" ng-click="select($event)">Idukki</a></li>
+				<li><a href="" ng-click="select($event)">Imphal</a></li>
+				<li><a href="" ng-click="select($event)">Indore</a></li>
+				<li><a href="" ng-click="select($event)">Jabalpur</a></li>
+				<li><a href="" ng-click="select($event)">Jaipur</a></li>
+				<li><a href="" ng-click="select($event)">Jajpur</a></li>
+				<li><a href="" ng-click="select($event)">Jakarta</a></li>
+				<li><a href="" ng-click="select($event)">Jalandhar</a></li>
+				<li><a href="" ng-click="select($event)">Jalgaon</a></li>
+				<li><a href="" ng-click="select($event)">Jalna</a></li>
+				<li><a href="" ng-click="select($event)">Jalpaiguri</a></li>
+				<li><a href="" ng-click="select($event)">Jammu</a></li>
+				<li><a href="" ng-click="select($event)">Jamnagar</a></li>
+				<li><a href="" ng-click="select($event)">Jamshedpur</a></li>
+				<li><a href="" ng-click="select($event)">Janjgir-champa</a></li>
+				<li><a href="" ng-click="select($event)">Jaunpur</a></li>
+				<li><a href="" ng-click="select($event)">Jewargi</a></li>
+				<li><a href="" ng-click="select($event)">Jhajjar</a></li>
+				<li><a href="" ng-click="select($event)">Jhansi</a></li>
+				<li><a href="" ng-click="select($event)">Jharsuguda</a></li>
+				<li><a href="" ng-click="select($event)">Jhunjhunu</a></li>
+				<li><a href="" ng-click="select($event)">Jind</a></li>
+				<li><a href="" ng-click="select($event)">Jodhpur</a></li>
+				<li><a href="" ng-click="select($event)">Jorhat</a></li>
+				<li><a href="" ng-click="select($event)">Junagadh</a></li>
+				<li><a href="" ng-click="select($event)">Kakinada</a></li>
+				<li><a href="" ng-click="select($event)">Kanchipuram</a></li>
+				<li><a href="" ng-click="select($event)">Kangra</a></li>
+				<li><a href="" ng-click="select($event)">Kanker</a></li>
+				<li><a href="" ng-click="select($event)">Kannur</a></li>
+				<li><a href="" ng-click="select($event)">Kanpur Nagar</a></li>
+				<li><a href="" ng-click="select($event)">Kanyakumari</a></li>
+				<li><a href="" ng-click="select($event)">Kapurthala</a></li>
+				<li><a href="" ng-click="select($event)">Karaikal</a></li>
+				<li><a href="" ng-click="select($event)">Karauli</a></li>
+				<li><a href="" ng-click="select($event)">Karimnagar</a></li>
+				<li><a href="" ng-click="select($event)">Karnal</a></li>
+				<li><a href="" ng-click="select($event)">Karur</a></li>
+				<li><a href="" ng-click="select($event)">Karwar</a></li>
+				<li><a href="" ng-click="select($event)">Kasargod</a></li>
+				<li><a href="" ng-click="select($event)">Kaushambi</a></li>
+				<li><a href="" ng-click="select($event)">Khammam</a></li>
+				<li><a href="" ng-click="select($event)">Khargone</a></li>
+				<li><a href="" ng-click="select($event)">Kheda</a></li>
+				<li><a href="" ng-click="select($event)">Kohima</a></li>
+				<li><a href="" ng-click="select($event)">Kolar</a></li>
+				<li><a href="" ng-click="select($event)">Kolhapur</a></li>
+				<li><a href="" ng-click="select($event)">Kollam</a></li>
+				<li><a href="" ng-click="select($event)">Korba</a></li>
+				<li><a href="" ng-click="select($event)">Kota</a></li>
+				<li><a href="" ng-click="select($event)">Kottayam</a></li>
+				<li><a href="" ng-click="select($event)">Kozhikode</a></li>
+				<li><a href="" ng-click="select($event)">Krishna</a></li>
+				<li><a href="" ng-click="select($event)">Krishnagiri</a></li>
+				<li><a href="" ng-click="select($event)">Kuala Lumpur</a></li>
+				<li><a href="" ng-click="select($event)">Kumbakonam</a></li>
+				<li><a href="" ng-click="select($event)">Kumta</a></li>
+				<li><a href="" ng-click="select($event)">Kurnool</a></li>
+				<li><a href="" ng-click="select($event)">Kurukshetra</a></li>
+				<li><a href="" ng-click="select($event)">Kutch</a></li>
+				<li><a href="" ng-click="select($event)">Lakhimpur</a></li>
+				<li><a href="" ng-click="select($event)">Latur</a></li>
+				<li><a href="" ng-click="select($event)">Lucknow</a></li>
+				<li><a href="" ng-click="select($event)">Ludhiana</a></li>
+				<li><a href="" ng-click="select($event)">Madhepura</a></li>
+				<li><a href="" ng-click="select($event)">Madurai</a></li>
+				<li><a href="" ng-click="select($event)">Maharajganj</a></li>
+				<li><a href="" ng-click="select($event)">Mahbubnagar</a></li>
+				<li><a href="" ng-click="select($event)">Mahendragarh</a></li>
+				<li><a href="" ng-click="select($event)">Mahesana</a></li>
+				<li><a href="" ng-click="select($event)">Malappuram</a></li>
+				<li><a href="" ng-click="select($event)">Malda</a></li>
+				<li><a href="" ng-click="select($event)">Malkangiri</a></li>
+				<li><a href="" ng-click="select($event)">Malur</a></li>
+				<li><a href="" ng-click="select($event)">Malvan</a></li>
+				<li><a href="" ng-click="select($event)">Mandi</a></li>
+				<li><a href="" ng-click="select($event)">Mandsaur</a></li>
+				<li><a href="" ng-click="select($event)">Mandya</a></li>
+				<li><a href="" ng-click="select($event)">Mangalore</a></li>
+				<li><a href="" ng-click="select($event)">Mansa</a></li>
+				<li><a href="" ng-click="select($event)">Mathura</a></li>
+				<li><a href="" ng-click="select($event)">Medak</a></li>
+				<li><a href="" ng-click="select($event)">Meerut</a></li>
+				<li><a href="" ng-click="select($event)">Metro Manila</a></li>
+				<li><a href="" ng-click="select($event)">Mewat</a></li>
+				<li><a href="" ng-click="select($event)">Mohali</a></li>
+				<li><a href="" ng-click="select($event)">Moradabad</a></li>
+				<li><a href="" ng-click="select($event)">Muktsar</a></li>
+				<li><a href="" ng-click="select($event)">Munger</a></li>
+				<li><a href="" ng-click="select($event)">Murshidabad</a></li>
+				<li><a href="" ng-click="select($event)">Muzaffarnagar</a></li>
+				<li><a href="" ng-click="select($event)">Muzaffarpur</a></li>
+				<li><a href="" ng-click="select($event)">Mysore</a></li>
+				<li><a href="" ng-click="select($event)">Nadia</a></li>
+				<li><a href="" ng-click="select($event)">Nagaon</a></li>
+				<li><a href="" ng-click="select($event)">Nagercoil</a></li>
+				<li><a href="" ng-click="select($event)">Nagpur</a></li>
+				<li><a href="" ng-click="select($event)">Nainital</a></li>
+				<li><a href="" ng-click="select($event)">Nalgonda</a></li>
+				<li><a href="" ng-click="select($event)">Namakkal</a></li>
+				<li><a href="" ng-click="select($event)">Nanded</a></li>
+				<li><a href="" ng-click="select($event)">Nandurbar</a></li>
+				<li><a href="" ng-click="select($event)">Narnaul</a></li>
+				<li><a href="" ng-click="select($event)">Nashik</a></li>
+				<li><a href="" ng-click="select($event)">Navi Mumbai</a></li>
+				<li><a href="" ng-click="select($event)">Navsari</a></li>
+				<li><a href="" ng-click="select($event)">Nawada</a></li>
+				<li><a href="" ng-click="select($event)">Nawanshahr</a></li>
+				<li><a href="" ng-click="select($event)">Nellore</a></li>
+				<li><a href="" ng-click="select($event)">Nizamabad</a></li>
+				<li><a href="" ng-click="select($event)">Noida</a></li>
+				<li><a href="" ng-click="select($event)">North 24 Parganas</a></li>
+				<li><a href="" ng-click="select($event)">North Goa</a></li>
+				<li><a href="" ng-click="select($event)">Osmanabad</a></li>
+				<li><a href="" ng-click="select($event)">Palakkad</a></li>
+				<li><a href="" ng-click="select($event)">Panch Mahals</a></li>
+				<li><a href="" ng-click="select($event)">Panchkula</a></li>
+				<li><a href="" ng-click="select($event)">Pandavapura</a></li>
+				<li><a href="" ng-click="select($event)">Panipat</a></li>
+				<li><a href="" ng-click="select($event)">Papum Pare</a></li>
+				<li><a href="" ng-click="select($event)">Parbhani</a></li>
+				<li><a href="" ng-click="select($event)">Pashchim Champaran</a></li>
+				<li><a href="" ng-click="select($event)">Patan</a></li>
+				<li><a href="" ng-click="select($event)">Pathanamthitta</a></li>
+				<li><a href="" ng-click="select($event)">Patiala</a></li>
+				<li><a href="" ng-click="select($event)">Patna</a></li>
+				<li><a href="" ng-click="select($event)">Perambalur</a></li>
+				<li><a href="" ng-click="select($event)">Porbandar</a></li>
+				<li><a href="" ng-click="select($event)">Prakasam</a></li>
+				<li><a href="" ng-click="select($event)">Pratapgarh</a></li>
+				<li><a href="" ng-click="select($event)">Puducherry</a></li>
+				<li><a href="" ng-click="select($event)">Pudukkottai</a></li>
+				<li><a href="" ng-click="select($event)">Pulwama</a></li>
+				<li><a href="" ng-click="select($event)">Puttur</a></li>
+				<li><a href="" ng-click="select($event)">Raebareli</a></li>
+				<li><a href="" ng-click="select($event)">Raichur</a></li>
+				<li><a href="" ng-click="select($event)">Raigad</a></li>
+				<li><a href="" ng-click="select($event)">Raipur</a></li>
+				<li><a href="" ng-click="select($event)">Rajahmundry</a></li>
+				<li><a href="" ng-click="select($event)">Rajauri</a></li>
+				<li><a href="" ng-click="select($event)">Rajkot</a></li>
+				<li><a href="" ng-click="select($event)">Rajnandgaon</a></li>
+				<li><a href="" ng-click="select($event)">Ramanathapuram</a></li>
+				<li><a href="" ng-click="select($event)">Rampur</a></li>
+				<li><a href="" ng-click="select($event)">Ranchi</a></li>
+				<li><a href="" ng-click="select($event)">Rangareddi</a></li>
+				<li><a href="" ng-click="select($event)">Ratnagiri</a></li>
+				<li><a href="" ng-click="select($event)">Rewa</a></li>
+				<li><a href="" ng-click="select($event)">Rewari</a></li>
+				<li><a href="" ng-click="select($event)">Rio De Janeiro</a></li>
+				<li><a href="" ng-click="select($event)">Rohtak</a></li>
+				<li><a href="" ng-click="select($event)">Rohtas</a></li>
+				<li><a href="" ng-click="select($event)">Rupnagar</a></li>
+				<li><a href="" ng-click="select($event)">Sabar Kantha</a></li>
+				<li><a href="" ng-click="select($event)">Saharanpur</a></li>
+				<li><a href="" ng-click="select($event)">Sakleshpur</a></li>
+				<li><a href="" ng-click="select($event)">Salem</a></li>
+				<li><a href="" ng-click="select($event)">Samastipur</a></li>
+				<li><a href="" ng-click="select($event)">Sambalpur</a></li>
+				<li><a href="" ng-click="select($event)">Sangli</a></li>
+				<li><a href="" ng-click="select($event)">Sangrur</a></li>
+				<li><a href="" ng-click="select($event)">Sao Paulo</a></li>
+				<li><a href="" ng-click="select($event)">Saran</a></li>
+				<li><a href="" ng-click="select($event)">Satara</a></li>
+				<li><a href="" ng-click="select($event)">Sawai Madhopur</a></li>
+				<li><a href="" ng-click="select($event)">Shahjahanpur</a></li>
+				<li><a href="" ng-click="select($event)">Sheopur</a></li>
+				<li><a href="" ng-click="select($event)">Shikaripur</a></li>
+				<li><a href="" ng-click="select($event)">Shimla</a></li>
+				<li><a href="" ng-click="select($event)">Shimoga</a></li>
+				<li><a href="" ng-click="select($event)">Shorapur</a></li>
+				<li><a href="" ng-click="select($event)">Sikar</a></li>
+				<li><a href="" ng-click="select($event)">Sindhudurg</a></li>
+				<li><a href="" ng-click="select($event)">Singapore</a></li>
+				<li><a href="" ng-click="select($event)">Sirohi</a></li>
+				<li><a href="" ng-click="select($event)">Sirsa</a></li>
+				<li><a href="" ng-click="select($event)">Sitapur</a></li>
+				<li><a href="" ng-click="select($event)">Sivaganga</a></li>
+				<li><a href="" ng-click="select($event)">Siwan</a></li>
+				<li><a href="" ng-click="select($event)">Solan</a></li>
+				<li><a href="" ng-click="select($event)">Solapur</a></li>
+				<li><a href="" ng-click="select($event)">Sonipat</a></li>
+				<li><a href="" ng-click="select($event)">South 24 Parganas</a></li>
+				<li><a href="" ng-click="select($event)">South Goa</a></li>
+				<li><a href="" ng-click="select($event)">South Tripura</a></li>
+				<li><a href="" ng-click="select($event)">Sri Ganganagar</a></li>
+				<li><a href="" ng-click="select($event)">Srikakulam</a></li>
+				<li><a href="" ng-click="select($event)">Srinagar</a></li>
+				<li><a href="" ng-click="select($event)">Sullia</a></li>
+				<li><a href="" ng-click="select($event)">Sundergarh</a></li>
+				<li><a href="" ng-click="select($event)">Supaul</a></li>
+				<li><a href="" ng-click="select($event)">Surat</a></li>
+				<li><a href="" ng-click="select($event)">Surguja</a></li>
+				<li><a href="" ng-click="select($event)">São Paulo</a></li>
+				<li><a href="" ng-click="select($event)">Tawang</a></li>
+				<li><a href="" ng-click="select($event)">Thane</a></li>
+				<li><a href="" ng-click="select($event)">Thanjavur</a></li>
+				<li><a href="" ng-click="select($event)">Theni</a></li>
+				<li><a href="" ng-click="select($event)">Thiruvananthapuram</a></li>
+				<li><a href="" ng-click="select($event)">Thoothukudi</a></li>
+				<li><a href="" ng-click="select($event)">Thrissur</a></li>
+				<li><a href="" ng-click="select($event)">Tinsukia</a></li>
+				<li><a href="" ng-click="select($event)">Tiptur</a></li>
+				<li><a href="" ng-click="select($event)">Tiruchirappalli</a></li>
+				<li><a href="" ng-click="select($event)">Tirunelveli</a></li>
+				<li><a href="" ng-click="select($event)">Tirupur</a></li>
+				<li><a href="" ng-click="select($event)">Tiruvallur</a></li>
+				<li><a href="" ng-click="select($event)">Tiruvannamalai</a></li>
+				<li><a href="" ng-click="select($event)">Tumkur</a></li>
+				<li><a href="" ng-click="select($event)">Udaipur</a></li>
+				<li><a href="" ng-click="select($event)">Udham Singh Nagar</a></li>
+				<li><a href="" ng-click="select($event)">Udhampur</a></li>
+				<li><a href="" ng-click="select($event)">Udupi</a></li>
+				<li><a href="" ng-click="select($event)">Ujjain</a></li>
+				<li><a href="" ng-click="select($event)">Una</a></li>
+				<li><a href="" ng-click="select($event)">Vadodara</a></li>
+				<li><a href="" ng-click="select($event)">Vaishali</a></li>
+				<li><a href="" ng-click="select($event)">Valsad</a></li>
+				<li><a href="" ng-click="select($event)">Varanasi</a></li>
+				<li><a href="" ng-click="select($event)">Vellore</a></li>
+				<li><a href="" ng-click="select($event)">Vidisha</a></li>
+				<li><a href="" ng-click="select($event)">Vijayawada</a></li>
+				<li><a href="" ng-click="select($event)">Viluppuram</a></li>
+				<li><a href="" ng-click="select($event)">Visakhapatnam</a></li>
+				<li><a href="" ng-click="select($event)">Vizianagaram</a></li>
+				<li><a href="" ng-click="select($event)">Warangal</a></li>
+				<li><a href="" ng-click="select($event)">Wardha</a></li>
+				<li><a href="" ng-click="select($event)">Wayanad</a></li>
+				<li><a href="" ng-click="select($event)">West Godavari</a></li>
+				<li><a href="" ng-click="select($event)">Yamunanagar</a></li>
+				<li><a href="" ng-click="select($event)">Yavatmal</a></li>
+			</ul>
+		</div>
+	</div>
+	<div ng-view class="contentWrapper"></div>
+	
+
+</body>
+</html>
