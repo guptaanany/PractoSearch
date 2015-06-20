@@ -1,0 +1,34 @@
+<div class="content">
+		<div id="container">
+			<div class="row">
+				<!-- Results list and tabular data -->
+				<div class="span9" id="results-main">
+					<!-- part reslults -->
+					<div id="results" class="results-on">
+						
+						<div class="result-part" ng-repeat="doctor in doctors">
+							<div class="image-container">
+								<img id="result-thumb" class="pull-left" src="images/doc.jpeg">
+							</div>
+							<div class="doc-details">
+								<h3 style="margin:0"><a href="#" class="view-detail"> {{doctor.name}}</a></h3>
+								<p>{{doctor.qual}}</p>
+								<p>{{doctor.exp}} years of Experience</p>
+								<p>{{doctor.spec.name}}</p>
+								<p>{{doctor.clinicList[0].clinic_name}}</p>
+							</div>
+							<div class="price-avail pull-right">
+								<p class="price"><span style="margin-right:5px"><i class="fa fa-clock-o"></i></span>MON-SAT 10:00 AM to 6:00PM</p>
+								<p class="avail"><span style="margin-right:5px"><i class="fa fa-map-marker"></i></span>{{doctor.clinicList[0].clinic_location}}<br>{{clinic_address}}</p>
+							</div>
+						</div>
+						
+		          	<br>
+				</div>
+			</div>
+			<!-- end parts results -->
+			
+		</div>
+	</div>
+
+</div>

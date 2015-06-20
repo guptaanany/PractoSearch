@@ -1,0 +1,27 @@
+<button type="button" class="btn btn-primary" ng-click="addDoctor()" style = "margin:5px"><span style="margin-right:5px"><i class="fa fa-plus"></i></span>Add Doctor</button>
+
+
+<table class="table table-striped" style="margin-top:5px">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Qualification</th>
+					<th>Experience</th>
+					<th>Specialization</th>
+					<th>Clinic</th>
+					<th>Mobile Number</th>
+					<th>EmailId</th>
+					<th>Action</th>
+				</tr>
+				<tr ng-repeat="doctor in doctors  | filter: searchKeyword ">
+					<td>{{doctor.id}}</td>
+					<td>{{doctor.name}}</td>
+					<td>{{doctor.qual}}</td>
+					<td>{{doctor.exp}}</td>
+					<td>{{doctor.spec.name}}</td>
+					<td><span ng-repeat="clinic in doctor.clinicList">{{clinic.clinic_name}}</span></td>
+					<td>{{doctor.mobileNumber}}</td>
+					<td>{{doctor.email}}</td>
+					<td><span style="margin-left:5px;cursor:pointer;color:blue" ng-click="editDoctor(doctor)"><i class="fa fa-edit"></i></span><span style="margin-left:5px;cursor:pointer;color:red" ng-click="removeDoctor(doctor,$index)"><i class="fa fa-remove"></i></span></td>
+				</tr>
+			</table>

@@ -4,13 +4,16 @@
 			<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 panel">
 				<form class="margin-base-vertical form-inline" role="form">
 					<div class="row row-centered">
+
 						<p class="input-group col-lg-5 col-md-5" style="float:none">
 							<span class="input-group-addon"><span class="fa fa-user-md fa-2x"></span></span>
-							<input type="text" ng-model="speciality" class="form-control input-lg" name="speciality" placeholder="Speciality" />
+							<!--<input type="text" ng-model="specialization" class="form-control input-lg" name="speciality" placeholder="Speciality" />-->
+							<autocomplete ng-model="specialization" attr-placeholder="Specialization" click-activation="true" data="specializations" ></autocomplete>
 						</p>
 						<p class="input-group col-lg-5 col-md-5" style="float:none">
 							<span class="input-group-addon"><span class="fa fa-globe fa-2x"></span></span>
-							<input type="text" ng-model="region" class="form-control input-lg" name="region" placeholder="Region" />
+							<!--<input type="text" ng-model="region" class="form-control input-lg" name="region" placeholder="Region" />-->
+							<autocomplete ng-model="region" attr-placeholder="Region" click-activation="true" data="locations" ></autocomplete>
 						</p>
 						<p class="input-group col-lg-1 col-md-1" style="float:none">
 							<button type="submit" ng-click = "searchClicked()" class="btn btn-success btn-lg">Search</button>

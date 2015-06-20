@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practo Search</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Bootstrap -->
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.16/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/autocomplete.js"></script>
+	 <link rel="stylesheet" href="css/autocomplete.css">
+
+	<script src="js/index.js"></script>
+	<link href="http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet" />
+
+	<link href="./css/style.css" rel="stylesheet" />
+
+</head>
+<body ng-app = "PractoSearch">
+	<div id="header" ng-controller = "headerController">
+		<a class="headerLogo" href="/">
+			<img src="./images/practo_logo.png" style="margin-left:10px">
+		</a>
+		<div class="city">
+			<a class="cityButton" ng-class="clicked?'active':''" ng-click="toggleClass()">{{citySelected}}</a>
+			<ul style="top: 20px; max-height: 322px;" ng-show="clicked">
+				<li><a href="" ng-repeat="city in cities" ng-click="select(city)">{{city}}</a></li>
+			</ul>
+		</div>
+	</div>
+	<div ng-view class="contentWrapper"></div>
+	
+
+</body>
+</html>
